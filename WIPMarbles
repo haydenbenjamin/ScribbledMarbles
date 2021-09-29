@@ -1,0 +1,117 @@
+//let hash = tokenData.hash;
+function random_hash() {
+  let x = "0123456789abcdef", hash = '0x';
+  for (let i = 64; i > 0; --i) {
+    hash += x[Math.floor(Math.random()*x.length)];
+  }
+  return hash;
+}
+tokenData = {
+  "hash": random_hash(),
+  "tokenId": "123000456"
+}
+let seed = parseInt(random_hash, 16);
+
+class Random {
+  constructor(seed) {
+    this.seed = seed;
+  }
+  random_dec() {
+    /* Algorithm "xor" from p. 4 of Marsaglia, "Xorshift RNGs" */
+    this.seed ^= this.seed << 13;
+    this.seed ^= this.seed >> 17;
+    this.seed ^= this.seed << 5;
+    return ((this.seed < 0 ? ~this.seed + 1 : this.seed) % 1000) / 1000;
+  }
+  random_num(a, b) {
+    return a+(b-a)*this.random_dec();
+  }
+  random_int(a, b) {
+    return Math.floor(this.random_num(a, b+1));
+  }
+}
+
+
+let R = new Random(seed);
+let graphics;
+function setup() {
+  createCanvas(400, 400,WEBGL);  
+  graphics = createGraphics(400,400,WEBGL);
+  graphics.background(200);
+
+}
+     var megacounter=0,x1w=0,y1w=0,x2w=0,y2w=0,x1bk=0,y1bk=0,x2bk=0,y2bk=0,x1bl=0,y1bl=0,x2bl=0,y2bl=0,w=400,h=400,counter=0,thick=0, colorpicker=0,plusminus=0;
+    x2w=R.random_int(0,200);
+    y2w=R.random_int(0,200);
+    x2bk=R.random_int(-200,0);
+    y2bk=R.random_int(-200,0);
+    x2bl=R.random_int(-200,200);
+    y2bl=R.random_int(-200,200);
+xOff=R.random_num(-2,2);
+yOff=R.random_num(-2,2);
+zOff=R.random_num(-2,2);
+xSpeed=0.5;
+ySpeed=0.5;
+zSpeed=0.5; 
+function draw() {
+  background('rgb(25,25,25)');
+    counter=0;
+    //  do {
+    x1w=x2w;
+    y1w=y2w; 
+    x1bl=x2bl;
+    y1bl=y2bl; 
+    x1bk=x2bk;
+    y1bk=y2bk; 
+
+      x2w=x2w+7*(0.5-R.random_dec());
+      x2w=x2w+7*(0.5-R.random_dec());
+      y2w=y2w+7*(0.5-R.random_dec());
+      y2w=y2w+7*(0.5-R.random_dec());
+      x2bl=x2bl+7*(0.5-R.random_dec());
+      x2bl=x2bl+7*(0.5-R.random_dec());
+      y2bl=y2bl+7*(0.5-R.random_dec());
+      y2bl=y2bl+7*(0.5-R.random_dec());
+      x2bk=x2bk+7*(0.5-R.random_dec());
+      x2bk=x2bk+7*(0.5-R.random_dec());
+      y2bk=y2bk+7*(0.5-R.random_dec());
+      y2bk=y2bk+7*(0.5-R.random_dec());  
+  push(); 
+  graphics.strokeWeight(3);
+    graphics.stroke(0, 114, 206); 
+  graphics.line (x1bl,y1bl,x2bl,y2bl);
+    graphics.stroke(10, 10, 10);   
+  graphics.line (x1bk,y1bk,x2bk,y2bk);
+    graphics.stroke(252, 252, 252);
+  graphics.line (x1w,y1w,x2w,y2w);
+  pop();   
+
+
+ rotateY(-millis() / 3000 );
+ rotateX(millis() / 8000 );
+ rotateZ(millis() / 8000);
+ //directionalLight(256, 256, 256,-190, -190, 1);
+ //directionalLight(256, 256, 256,190, 190, 1);
+ //directionalLight(256, 256, 256,-190, 190, 1);
+ //directionalLight(256, 256, 256,190,-190, 1);
+ directionalLight(256, 256, 256,0,0,-5);
+  fill(150);
+  texture(graphics); 
+  noStroke();
+  translate(xOff, yOff, zOff);
+  sphere(100);  
+  
+  xOff+=xSpeed;
+  yOff+=ySpeed;
+  zOff+=zSpeed;
+   if (xOff > 60 || xOff < -60) {
+    xSpeed = -xSpeed;
+  }
+   if (yOff > 60 || yOff < -60) {
+    ySpeed = -ySpeed;
+  }
+   if (zOff > -200 || zOff < 25) {
+    zSpeed = -zSpeed;
+  }
+  
+}
