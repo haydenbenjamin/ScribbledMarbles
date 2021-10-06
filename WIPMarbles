@@ -41,12 +41,12 @@ function setup() {
 
 }
      var megacounter=0,x1w=0,y1w=0,x2w=0,y2w=0,x1bk=0,y1bk=0,x2bk=0,y2bk=0,x1bl=0,y1bl=0,x2bl=0,y2bl=0,w=400,h=400,counter=0,thick=0, colorpicker=0,plusminus=0;
-    x2w=R.random_int(0,200);
-    y2w=R.random_int(0,200);
-    x2bk=R.random_int(-200,0);
-    y2bk=R.random_int(-200,0);
-    x2bl=R.random_int(-200,200);
-    y2bl=R.random_int(-200,200);
+    x2w=R.random_int(-50,100);
+    y2w=R.random_int(0,180);
+    x2bk=R.random_int(-100,50);
+    y2bk=R.random_int(-150,0);
+    x2bl=R.random_int(-180,120);
+    y2bl=R.random_int(-100,100);
 xOff=R.random_num(-2,2);
 yOff=R.random_num(-2,2);
 zOff=R.random_num(-2,2);
@@ -65,16 +65,10 @@ function draw() {
     y1bk=y2bk; 
 
       x2w=x2w+7*(0.5-R.random_dec());
-      x2w=x2w+7*(0.5-R.random_dec());
-      y2w=y2w+7*(0.5-R.random_dec());
       y2w=y2w+7*(0.5-R.random_dec());
       x2bl=x2bl+7*(0.5-R.random_dec());
-      x2bl=x2bl+7*(0.5-R.random_dec());
-      y2bl=y2bl+7*(0.5-R.random_dec());
       y2bl=y2bl+7*(0.5-R.random_dec());
       x2bk=x2bk+7*(0.5-R.random_dec());
-      x2bk=x2bk+7*(0.5-R.random_dec());
-      y2bk=y2bk+7*(0.5-R.random_dec());
       y2bk=y2bk+7*(0.5-R.random_dec());  
   push(); 
   graphics.strokeWeight(3);
@@ -87,16 +81,17 @@ function draw() {
   pop();   
 
 
- rotateY(-millis() / 3000 );
- rotateX(millis() / 8000 );
- rotateZ(millis() / 8000);
- //directionalLight(256, 256, 256,-190, -190, 1);
- //directionalLight(256, 256, 256,190, 190, 1);
- //directionalLight(256, 256, 256,-190, 190, 1);
- //directionalLight(256, 256, 256,190,-190, 1);
- directionalLight(256, 256, 256,0,0,-5);
+ rotateY(-millis() / 1000 );
+ rotateX(millis() / 1500 );
+ rotateZ(millis() / 3000);
+ directionalLight(256, 25, 256,-150, -150, 1);
+ directionalLight(56, 256, 256,190, 190, 1);
+ directionalLight(56, 256, 256,-100, 100, 1);
+ directionalLight(256, 25, 256,190,-130, 1);
+ directionalLight(256, 256, 256,0,0,-50);
   fill(150);
-  texture(graphics); 
+  texture(graphics);
+  shininess(500);
   noStroke();
   translate(xOff, yOff, zOff);
   sphere(100);  
